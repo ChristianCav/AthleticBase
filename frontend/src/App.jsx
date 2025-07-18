@@ -4,19 +4,18 @@ import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import { Routes, Route } from 'react-router'
 import Navbar from './components/NavBar'
+import HomePage from './pages/HomePage'
 
 const App = () => {
   return (
-    <div data-theme="dark">
       <div className='relative h-full w-full'>
-        <Navbar></Navbar>
+        <Navbar />
         <Routes>
           <Route path="/" element={<LandingPage />}/>
           <Route path="/login" element={<Login />}/>
           <Route path="/signup" element={<SignUp />}/>
         </Routes>
       </div>
-    </div>
   )
 }
 
