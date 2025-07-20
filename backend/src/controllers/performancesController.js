@@ -1,8 +1,10 @@
 import Performance from "../models/Performance.js";
+import User from "../models/User.js";
 
-export async function getAllPerformances(_, res){
+// works
+export async function getPerformances(req, res){
     try{
-        const performances = await Performance.find().sort({date: -1});
+        const performances = await Performance.find({userId: req.user.id}).sort({date: -1});
         res.status(200).json(performances);
     }catch(error){
         console.error("Error in getAllPerformances controller", error)
@@ -10,32 +12,12 @@ export async function getAllPerformances(_, res){
     }
 }
 
-export async function getUserPerformances(req, res){
-    try{
-        const userId = req.params.userId
-        const performances = await Performance.find({userId}).sort({date: -1});
-        res.status(200).json(performances);
-    }catch(error){
-        console.error("Error in getUserPerformances controller", error)
-        res.status(500).json({message: "Internal server error"})
-    }
-}
-
-export async function getPerformanceById(req, res){
-    try{
-        const performance = await Performance.findById(req.params.id);
-        if(!performance) return res.status(404).json({message: "Performance not found"})
-        res.status(200).json(performance);
-    }catch(error){
-        console.error("Error in getPerformanceById controller", error)
-        res.status(500).json({message: "Internal server error"})
-    }
-}
-
 export async function createPerformance(req, res){
     try{
         const {title, userId, type, date, duration, location, data} = req.body;
-        console.log(title, userId, type, date, duration, location, data)
+        if(!title || !userId || !type || !date || !duration || !location || !data){
+            return res.status(400).json({message: "Please input all required fields"});
+        }
         const performance = new Performance({title, userId, type, date, duration, location, data});
         const savedPerformance = await performance.save();
         res.status(201).json(savedPerformance)
@@ -47,8 +29,15 @@ export async function createPerformance(req, res){
 
 export async function updatePerformance(req, res){
     try{
-        const {title, userId, type, date, duration, location, data} = req.body;
-        const updatedPerformance = await Performance.findByIdAndUpdate(req.params.id, {title, userId, type, date, duration, location, data}, {new: true});
+        const performance = await Performance.findById(req.params.id);
+        if(!performance) return res.status(400).json({message: "Performance not found"});
+        const user = await User.findById(req.user.id);
+        if(!user) return res.status(401).json({message: "User not found" });
+        // Make sure the logged in user matches the goal user
+        if(performance.userId.toString() !== user.id){
+            return res.status(401).json({message: "User not authorized"})
+        }
+        const updatedPerformance = await Performance.findByIdAndUpdate(req.params.id, req.body, {new: true});
         if(!updatedPerformance) return res.status(404).json({message: "Performance not found"})
         res.status(200).json({message: "Performance updated successfully"});
     }
@@ -59,10 +48,18 @@ export async function updatePerformance(req, res){
 
 }
 
+// works
 export async function deletePerformance(req, res){
     try{
-        const deletedPerformance = await Performance.findByIdAndDelete(req.params.id);
-        if(!deletedPerformance) return res.status(404).json({message: "Performance not found"})
+        const performance = await Performance.findById(req.params.id);
+        if(!performance) return res.status(404).json({message: "Performance not found"})
+        const user = await User.findById(req.user.id);
+        if(!user) return res.status(401).json({message: "User not found" });
+        // Make sure the logged in user matches the goal user
+        if(performance.userId.toString() !== user.id){
+            return res.status(401).json({message: "User not authorized"})
+        }
+        const deletedPerformance = await Performance.deleteOne({_id: req.params.id});
         res.status(200).json({message: "Performance deleted successfully"})
     }
     catch(error){
