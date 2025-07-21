@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import User from "../models/User.js"
 import jwt from "jsonwebtoken"
+import Performance from "../models/Performance.js";
 
 export async function getAllUsers(_, res){
     try{
@@ -14,7 +15,7 @@ export async function getAllUsers(_, res){
 
 export async function getMe(req, res){
     try{
-        const user= await User.findById(req.user.id);
+        const user = await User.findById(req.user.id);
         if(!user) return res.status(404).json({message: "User not found"})
         res.status(200).json(user);
     }catch(error){
@@ -65,12 +66,6 @@ export async function loginUser(req, res){
     }
 }
 
-// Generate JWT
-const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: "30d"
-    })
-}
 
 export async function updateUser(req, res){
     try{
@@ -86,10 +81,22 @@ export async function updateUser(req, res){
 
 }
 
+// works
 export async function deleteUser(req, res){
     try{
-        const deletedUser = await User.findByIdAndDelete(req.params.id);
-        if(!deletedUser) return res.status(404).json({message: "User not found"})
+        const user = await User.findById(req.params.id);
+        const tokenUser = await User.findById(req.user.id);
+        if(!user || !tokenUser){
+            return res.status(404).json({message: "User not found or invalid token"});
+        }
+        console.log(user._id);
+        console.log(tokenUser._id)
+        // compare req.params.id to req.user.id to see if the users match before deleting
+        if(user._id.toString() != tokenUser._id.toString()) return res.status(400).json({message: "Not authorized"})
+        // delete the user's performances
+        await Performance.deleteMany({userId: user._id});
+        // delete the user
+        const deletedUser = await User.deleteOne({_id: req.user.id});
         res.status(200).json({message: "User deleted successfully"})
     }
     catch(error){
@@ -97,4 +104,12 @@ export async function deleteUser(req, res){
         res.status(500).json({message: "Internal server error"})
     }
 
+}
+
+
+// Generate JWT
+const generateToken = (id) => {
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: "30d"
+    })
 }

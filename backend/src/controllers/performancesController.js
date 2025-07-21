@@ -12,12 +12,15 @@ export async function getPerformances(req, res){
     }
 }
 
+// works
 export async function createPerformance(req, res){
     try{
         const {title, userId, type, date, duration, location, data} = req.body;
         if(!title || !userId || !type || !date || !duration || !location || !data){
             return res.status(400).json({message: "Please input all required fields"});
         }
+        // check if userId from body matches token userId
+        if(req.user.id !== userId) return res.status(400).json({message: "UserId does not match user from token"});
         const performance = new Performance({title, userId, type, date, duration, location, data});
         const savedPerformance = await performance.save();
         res.status(201).json(savedPerformance)
@@ -27,6 +30,7 @@ export async function createPerformance(req, res){
     }
 }
 
+//works
 export async function updatePerformance(req, res){
     try{
         const performance = await Performance.findById(req.params.id);
