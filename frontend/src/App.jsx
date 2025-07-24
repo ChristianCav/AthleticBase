@@ -7,6 +7,8 @@ import Navbar from './components/NavBar'
 import HomePage from './pages/HomePage'
 import CreatePerformance from './pages/CreatePerformance'
 import ProfilePage from './pages/ProfilePage'
+import SettingsPage from './pages/SettingsPage'
+import FriendsPage from './pages/FriendsPage'
 
 const App = () => {
   return (
@@ -20,6 +22,8 @@ const App = () => {
           <Route path='/create' element={<CreatePerformance />} />
           <Route path='/performance/:id'></Route>
           <Route path='/profile' element={<ProfilePage />}></Route>
+          <Route path='/settings' element={<SettingsPage />}></Route>
+          <Route path='/friends' element={<FriendsPage />}></Route>
         </Routes>
       </div>
   )
