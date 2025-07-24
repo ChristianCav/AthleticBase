@@ -6,6 +6,7 @@ import { Routes, Route } from 'react-router'
 import Navbar from './components/NavBar'
 import HomePage from './pages/HomePage'
 import CreatePerformance from './pages/CreatePerformance'
+import ProfilePage from './pages/ProfilePage'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/homepage" element={<HomePage />} />
           <Route path='/create' element={<CreatePerformance />} />
           <Route path='/performance/:id'></Route>
+          <Route path='/profile' element={<ProfilePage />}></Route>
         </Routes>
       </div>
   )

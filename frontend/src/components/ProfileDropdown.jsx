@@ -22,7 +22,7 @@ const ProfileDropdown = ({ user }) => {
             {open && (
                 <div className='dropdown absolute right-1 mt-3 bg-neutral-800 rounded-lg shadow z-50 flex flex-col w-40'>
                     <button type='button' className='btn btn-ghost text-white pr-5 text-md' onClick={() => navigate("/homepage")}>Performances</button>
-                    <button type='button' className='btn btn-ghost text-white pr-5 text-md'>Profile</button>
+                    <button type='button' onClick={() => navigate("/profile")} className='btn btn-ghost text-white pr-5 text-md'>Profile</button>
                     <button type='button' className='btn btn-ghost text-white pr-5 text-md'>Friends</button>
                     <button type='button' onClick={handleLogout} className='btn btn-ghost text-white pr-5 text-md'>Logout</button>
                 </div>
