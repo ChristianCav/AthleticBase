@@ -21,7 +21,10 @@ const SignUp = () => {
 
     setLoading(true);
     try{
-      await api.post("/users/signup", {username, email, password})
+      const res = await api.post("/users/signup", {username, email, password})
+      if(res.data){
+        localStorage.setItem('user', JSON.stringify(res.data));
+      }
       toast.success("Account created successfully!");
       navigate("/");
     } 
