@@ -22,11 +22,15 @@ const SignUp = () => {
     setLoading(true);
     try{
       const res = await api.post("/users/signup", {username, email, password})
-      if(res.data){
-        localStorage.setItem('user', JSON.stringify(res.data));
+      if(res.data.token){
+        localStorage.setItem("token", res.data.token)
       }
+      if(res.data.user){
+        localStorage.setItem("user", JSON.stringify(res.data.user))
+      }
+      console.log(res.data.token)
       toast.success("Account created successfully!");
-      navigate("/");
+      navigate("/homepage");
     } 
     catch(error){
       console.log("Error creating account",error);

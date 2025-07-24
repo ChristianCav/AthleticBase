@@ -38,9 +38,9 @@ export async function createUser(req, res){
         const existingUsername = await User.findOne({username});
         if(existingUsername) return res.status(400).json({message: "Username is already taken"})
 
-        const user = new User({username, email, password});
-        const savedUser = await user.save();
-        res.status(201).json({savedUser, token: generateToken(user._id)})
+        const newUser = new User({username, email, password});
+        const user = await newUser.save();
+        res.status(201).json({user, token: generateToken(user._id)})
     }catch(error){
         console.error("Error in createUser controller", error)
         res.status(500).json({message: "Internal server error"})
