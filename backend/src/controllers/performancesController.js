@@ -7,7 +7,18 @@ export async function getPerformances(req, res){
         const performances = await Performance.find({userId: req.user.id}).sort({date: -1});
         res.status(200).json(performances);
     }catch(error){
-        console.error("Error in getAllPerformances controller", error)
+        console.error("Error in getPerformances controller", error)
+        res.status(500).json({message: "Internal server error"})
+    }
+}
+
+// works
+export async function getAllPerformances(_, res){
+    try{
+        const performances = await Performance.find().sort({date: -1});
+        res.status(200).json(performances);
+    }catch(error){
+        console.error("Error in getPerformances controller", error)
         res.status(500).json({message: "Internal server error"})
     }
 }

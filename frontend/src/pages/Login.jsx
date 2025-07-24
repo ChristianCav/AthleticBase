@@ -21,7 +21,14 @@ const Login = () => {
 
     setLoading(true);
     try{
-      await api.post("/users/login", {email, password})
+      const res = await api.post("/users/login", {email, password})
+      if(res.data.token){
+        localStorage.setItem("token", res.data.token)
+      }
+      if(res.data.user){
+        localStorage.setItem("user", JSON.stringify(res.data.user))
+      }
+      console.log(res.data.token)
       console.log("Logged in!")
       toast.success("Logged in successfully!");
       navigate("/homepage");
