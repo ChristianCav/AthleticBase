@@ -27,8 +27,8 @@ export async function getAllPerformances(_, res){
 export async function createPerformance(req, res){
     try{
         const {title, userId, type, date, duration, location, data} = req.body;
-        if(!title || !userId || !type || !date || !duration || !location || !data){
-            return res.status(400).json({message: "Please input all required fields"});
+        if(!userId || !type || !date || !data){
+            return res.status(400).json({message: `User: ${userId}. Type: ${type}. Date: ${date}. Data: ${data}`});
         }
         // check if userId from body matches token userId
         if(req.user.id !== userId) return res.status(400).json({message: "UserId does not match user from token"});
