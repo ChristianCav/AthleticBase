@@ -1,4 +1,5 @@
 import React from 'react'
+import toast from 'react-hot-toast';
 import { Link } from 'react-router'
 import { useNavigate, useLocation } from 'react-router'
 
@@ -15,6 +16,13 @@ const Navbar = () => {
             navigate("/")
         }
     }
+
+    const handleLogout = () => {
+        localStorage.clear();
+        toast.success("Logout successful!")
+        navigate("/")
+    }
+
     return (
         <div className='navbar fixed left-0 max-h-20 top-0 z-50 border-b backdrop-blur-sm border-white/20 bg-neutral-950/30'>
             <div className="navbar-content flex-1">
@@ -30,7 +38,7 @@ const Navbar = () => {
                 <span className='text-3xl text-white font-semibold'>AthleticBase</span>
                 </button>
             </div>
-            {location.pathname === "/" && (
+            {location.pathname === "/" && !localStorage.getItem('user') && (
                 <div className="flex-none space-x-2">
                     <Link to="/login" className='btn btn-ghost text-lg text-white'>
                         Login
@@ -40,6 +48,11 @@ const Navbar = () => {
                     </Link>
                 </div>)
             }
+            {localStorage.getItem('user') && (
+                <div className='logout'>
+                    <button type='button' onClick={handleLogout} className='btn btn-ghost text-white pr-5 text-lg'>Log out</button>
+                </div>
+            )}
         </div>
     )
 }
