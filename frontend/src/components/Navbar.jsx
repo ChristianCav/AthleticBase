@@ -2,6 +2,7 @@ import React from 'react'
 import toast from 'react-hot-toast';
 import { Link } from 'react-router'
 import { useNavigate, useLocation } from 'react-router'
+import ProfileDropdown from './ProfileDropdown';
 
 const Navbar = () => {
     const location = useLocation();
@@ -17,11 +18,8 @@ const Navbar = () => {
         }
     }
 
-    const handleLogout = () => {
-        localStorage.clear();
-        toast.success("Logout successful!")
-        navigate("/")
-    }
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user)
 
     return (
         <div className='navbar fixed left-0 max-h-20 top-0 z-50 border-b backdrop-blur-sm border-white/20 bg-neutral-950/30'>
@@ -50,7 +48,7 @@ const Navbar = () => {
             }
             {localStorage.getItem('user') && (
                 <div className='logout'>
-                    <button type='button' onClick={handleLogout} className='btn btn-ghost text-white pr-5 text-lg'>Log out</button>
+                    <ProfileDropdown user={user} />
                 </div>
             )}
         </div>
