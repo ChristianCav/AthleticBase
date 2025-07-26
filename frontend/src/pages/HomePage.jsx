@@ -13,6 +13,7 @@ const HomePage = () => {
   const [refreshFlag, setRefreshFlag] = useState(false)
   const [performances, setPerformances] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState(true);
 
   useEffect(()=>{
     const fetchPerformances = async() =>{
@@ -25,10 +26,12 @@ const HomePage = () => {
             Authorization: `Bearer ${token}`
           }
         });
+        setIsAuthorized(true);
         console.log(res.data);
         setPerformances(res.data)
       }catch(error){
         toast.error("Couldn't fetch performances")
+        if(error.response.status === 401) setIsAuthorized(false);
         console.error("Error in fetching performances", error);
       }finally{
         setIsLoading(false);
@@ -39,9 +42,9 @@ const HomePage = () => {
 
   return (
     <div className='min-h-screen flex items-center justify-center bg-neutral-950'>
-      {isLoading && <div className='text-white text-xl'>Loading performances...</div>}
-      {performances.length === 0 && !isLoading && <NoPerformances/>}
-      {!isLoading && 
+      {isLoading && isAuthorized && <div className='text-white text-xl'>Loading performances...</div>}
+      {performances.length === 0 && isAuthorized && !isLoading && <NoPerformances/>}
+      {!isLoading && isAuthorized &&
         <div>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:grid-cols-4 text-white'>
             {performances.map(performance => (
@@ -58,6 +61,7 @@ const HomePage = () => {
           </div>
         </div>
       }
+      {!isAuthorized && <div className='text-white text-xl'>Not authorized, please log in</div>}
     </div>
   )
 }
