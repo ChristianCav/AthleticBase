@@ -56,7 +56,7 @@ const CreateSoccer = ({location, duration, title, date}) => {
                 <span className="label-text">Goals</span>
               </label>
               <input
-                type="text"
+                type="number"
                 placeholder="Enter goals"
                 className="input input-bordered w-full max-h-11"
                 onChange={(e) => {
@@ -73,7 +73,7 @@ const CreateSoccer = ({location, duration, title, date}) => {
                     <span className="label-text">Assists</span>
                 </label>
                 <input
-                    type="text"
+                    type="number"
                     placeholder="Enter assists"
                     className="input input-bordered w-full max-h-11"
                     onChange={(e) => {
@@ -92,7 +92,7 @@ const CreateSoccer = ({location, duration, title, date}) => {
                     <span className="label-text">Shots</span>
                 </label>
                 <input
-                    type="text"
+                    type="number"
                     placeholder="Enter shots"
                     className="input input-bordered w-full max-h-11"
                     onChange={(e) => {
@@ -109,7 +109,7 @@ const CreateSoccer = ({location, duration, title, date}) => {
                     <span className="label-text">Shots on target</span>
                 </label>
                 <input
-                    type="text"
+                    type="number"
                     placeholder="Enter SOT"
                     className="input input-bordered w-full max-h-11"
                     onChange={(e) => {
@@ -128,7 +128,7 @@ const CreateSoccer = ({location, duration, title, date}) => {
                     <span className="label-text">Yellow Cards</span>
                 </label>
                 <input
-                    type="text"
+                    type="number"
                     placeholder="Enter yellow cards"
                     className="input input-bordered w-full max-h-11"
                     onChange={(e) => {
@@ -145,7 +145,7 @@ const CreateSoccer = ({location, duration, title, date}) => {
                     <span className="label-text">Red Cards</span>
                 </label>
                 <input
-                    type="text"
+                    type="number"
                     placeholder="Enter red cards"
                     className="input input-bordered w-full max-h-11"
                     onChange={(e) => {

@@ -8,7 +8,9 @@ import PerformanceCard from '../components/PerformanceCard.jsx'
 import { Link } from 'react-router'
 import { Plus } from 'lucide-react'
 
+
 const HomePage = () => {
+  const [refreshFlag, setRefreshFlag] = useState(false)
   const [performances, setPerformances] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,26 +35,29 @@ const HomePage = () => {
       }
     }
     fetchPerformances();
-  }, []);
+  }, [refreshFlag]);
 
   return (
     <div className='min-h-screen flex items-center justify-center bg-neutral-950'>
       {isLoading && <div className='text-white text-xl'>Loading performances...</div>}
       {performances.length === 0 && !isLoading && <NoPerformances/>}
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:grid-cols-4 text-white'>
-        {performances.map(performance => (
-          <PerformanceCard key={performance._id} performance={performance} setPerformances={setPerformances} />
-        ))}
-      </div>
+      {!isLoading && 
+        <div>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:grid-cols-4 text-white'>
+            {performances.map(performance => (
+              <PerformanceCard key={performance._id} performance={performance} setPerformances={setPerformances} setRefreshFlag={setRefreshFlag} />
+            ))}
+          </div>
 
-      <div className="addPerformance bg-neutral-700 rounded-md">
-        <div className='border border-white bg-neutral-800 hover:bg-neutral-700 rounded-md w-12 h-12 fixed z-20 right-10 bottom-10'>
-          <Link to="/create" className='flex items-center justify-center h-full'>
-            <Plus color='white' />
-          </Link>
+          <div className="addPerformance bg-neutral-700 rounded-md">
+            <div className='border border-white bg-neutral-800 hover:bg-neutral-700 rounded-md w-12 h-12 fixed z-20 right-10 bottom-10'>
+              <Link to="/create" className='flex items-center justify-center h-full'>
+                <Plus color='white' />
+              </Link>
+            </div>
+          </div>
         </div>
-      </div>
-
+      }
     </div>
   )
 }

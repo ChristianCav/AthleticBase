@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import { ChevronDown, Calendar } from 'lucide-react'
+import { ChevronDown, Calendar, ArrowLeft } from 'lucide-react'
 import toast from 'react-hot-toast';
-import api from '../lib/axios.js';
 import { useNavigate } from 'react-router';
 import Login from './Login.jsx';
 import CreateSoccer from '../components/CreateSoccer.jsx';
+import CreateRun from '../components/CreateRun.jsx';
 
 const CreatePerformance = () => {
-  const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
   const [location, setLocation] = useState("");
@@ -19,8 +18,15 @@ const CreatePerformance = () => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState("Select a type");
 
-  const navigate = useNavigate();
   const options = ["Soccer", "Golf", "Run", "Workout"];
+
+  const handleContinue = () => {
+    if(type.trim() === "" || !date){
+      toast.error("Date and type are required");
+      return
+    }
+    setContinued(true);
+  }
 
   return (
     <div className='min-h-screen flex items-center justify-center bg-neutral-950'>
@@ -128,14 +134,19 @@ const CreatePerformance = () => {
             </div>
 
             <div className="form-control mt-6">
-              <button type="button" onClick={() => setContinued(true)} className="btn btn-primary max-h-11" disabled={type.trim() === ""}>Continue</button>
+              <button type="button" onClick={handleContinue} className="btn btn-primary max-h-11">Continue</button>
             </div>
           </div>}
 
 
           {continued && (
             <div>
+              <button type="button" className='btn btn-bordered text-white top-28 left-20 absolute' onClick={() => setContinued(false)}>
+                Back
+                <ArrowLeft size={18} />
+              </button>
               {type === "Soccer" ? <CreateSoccer date={date} location={location} title={title} duration={duration} /> : null}
+              {type === "Run" ? <CreateRun date={date} location={location} title={title} duration={duration} /> : null}
             </div>
           )}
     </div>
