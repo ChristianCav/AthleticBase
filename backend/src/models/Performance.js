@@ -8,18 +8,20 @@ const performanceSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ["soccer", "golf", "run", "workout"],
+        enum: ["Soccer", "Golf", "Run", "Workout"],
         required: true
     },
     title: {
         type: String,
-        required: true
+        default: "Untitled Performance"
     },
     duration: {
         type: Number,
+        default: 0,
     },
     location: {
         type: String,
+        default: ""
     },
     date: {
         type: Date,
