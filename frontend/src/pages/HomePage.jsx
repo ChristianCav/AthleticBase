@@ -46,7 +46,7 @@ const HomePage = () => {
       </div>
 
       <div className="addPerformance bg-neutral-700 rounded-md">
-        <div className='border border-white rounded-md w-12 h-12 fixed z-20 right-10 bottom-10'>
+        <div className='border border-white bg-neutral-800 hover:bg-neutral-700 rounded-md w-12 h-12 fixed z-20 right-10 bottom-10'>
           <Link to="/create" className='flex items-center justify-center h-full'>
             <Plus color='white' />
           </Link>
