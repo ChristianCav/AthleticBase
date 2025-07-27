@@ -7,6 +7,7 @@ import NoPerformances from '../components/NoPerformances.jsx'
 import PerformanceCard from '../components/PerformanceCard.jsx'
 import { Link } from 'react-router'
 import { Plus } from 'lucide-react'
+import Spinner from '../components/Spinner.jsx'
 
 
 const HomePage = () => {
@@ -42,7 +43,10 @@ const HomePage = () => {
 
   return (
     <div className='min-h-screen flex items-center justify-center bg-neutral-950'>
-      {isLoading && isAuthorized && <div className='text-white text-xl'>Loading performances...</div>}
+      {isLoading && isAuthorized && <div className='text-white text-xl flex flex-row gap-x-5 items-center justify-center'>
+        <Spinner />
+        Loading performances...
+        </div>}
       {performances.length === 0 && isAuthorized && !isLoading && <NoPerformances/>}
       {!isLoading && isAuthorized &&
         <div>

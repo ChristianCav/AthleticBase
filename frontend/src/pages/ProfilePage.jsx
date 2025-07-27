@@ -29,9 +29,11 @@ const ProfilePage = () => {
     }, []);
 
     return (
-        <div className='flex items-center justify-center text-base-content min-h-screen'>
-            <p>{profile.email}</p>
-            <p>{profile.username}</p>
+        <div className='flex items-center justify-center bg-neutral-950 min-h-screen'>
+            <div className='text-white'>
+                <p>{profile.email}</p>
+                <p>{profile.username}</p>
+            </div>
         </div>
     )
 }

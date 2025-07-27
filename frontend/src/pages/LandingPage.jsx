@@ -10,7 +10,7 @@ const LandingPage = () => {
           Track Your Game. Improve Your Game.
         </h1>
         <p className="text-[19px] text-gray-400 mb-8">
-          Log your performances for all forms of physical activity. Whether it's soccer, golf, or anything in between, you can log it.
+          Log your performances in all forms of physical activity. Whether it's soccer, golf, or anything in between, you can log it.
         </p>
       </div>
 

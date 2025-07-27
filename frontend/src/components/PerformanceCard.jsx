@@ -28,10 +28,10 @@ const PerformanceCard = ({performance, setPerformances, setRefreshFlag}) => {
   return (
     <Link to={`/performance/${performance._id}`} className='card bg-neutral-800 hover:shadow-lg hover:bg-neutral-700 transition-all duration-200 border-t-4 border-solid border-[#f3eeeed5]'>
         <div className='card-body'>
-            <h3 className='card-title text-base-content'>{performance.title}</h3>
-            <p className='type text-gray-300'>{performance.type}</p>
-            <p className='date text-gray-300'>{formatDate(new Date(performance.date))}</p>
-            <button className='absolute right-4 bottom-6' onClick={handleDelete}><Trash size={22} /></button>
+          <h3 className='card-title text-base-content'>{performance.title}</h3>
+          <p className='type text-gray-300'>{performance.type}</p>
+          <p className='date text-gray-300'>{formatDate(new Date(performance.date))}</p>
+          <button className='absolute right-4 bottom-6' onClick={handleDelete}><Trash size={22} /></button>
         </div>
 
     </Link>
