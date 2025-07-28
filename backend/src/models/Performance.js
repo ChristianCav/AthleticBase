@@ -30,6 +30,10 @@ const performanceSchema = new mongoose.Schema({
     data: {
         type: mongoose.Schema.Types.Mixed,
         required: true
+    },
+    starred: {
+        type: Boolean,
+        default: false
     }
 }, {timestamps: true});
 

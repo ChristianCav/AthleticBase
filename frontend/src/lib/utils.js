@@ -5,3 +5,8 @@ export function formatDate(date){
         year: "numeric"
     })
 }
+
+export function shortenTitle(title){
+    if(title.length < 24) return title;
+    return title.substring(0,24) + "..."
+}

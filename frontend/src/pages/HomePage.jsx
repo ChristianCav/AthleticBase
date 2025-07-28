@@ -42,7 +42,7 @@ const HomePage = () => {
   }, [refreshFlag]);
 
   return (
-    <div className='min-h-screen flex items-center justify-center bg-neutral-950'>
+    <div className='min-h-screen flex justify-center bg-neutral-950'>
       {isLoading && isAuthorized && <div className='text-white text-xl flex flex-row gap-x-5 items-center justify-center'>
         <Spinner />
         Loading performances...
@@ -50,7 +50,7 @@ const HomePage = () => {
       {performances.length === 0 && isAuthorized && !isLoading && <NoPerformances/>}
       {!isLoading && isAuthorized &&
         <div>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:grid-cols-4 text-white'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 xl:grid-cols-3 text-white mt-28'>
             {performances.map(performance => (
               <PerformanceCard key={performance._id} performance={performance} setPerformances={setPerformances} setRefreshFlag={setRefreshFlag} />
             ))}
