@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import NoPerformances from '../components/NoPerformances.jsx'
 import PerformanceCard from '../components/PerformanceCard.jsx'
 import { Link } from 'react-router'
-import { Plus } from 'lucide-react'
+import { Plus, Check } from 'lucide-react'
 import Spinner from '../components/Spinner.jsx'
 
 
@@ -15,6 +15,7 @@ const HomePage = () => {
   const [performances, setPerformances] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isAuthorized, setIsAuthorized] = useState(true);
+  const [sortStarred, setSortStarred] = useState(false);
 
   useEffect(()=>{
     const fetchPerformances = async() =>{
@@ -22,7 +23,7 @@ const HomePage = () => {
         const token = localStorage.getItem('token')
         console.log(token);
         setIsLoading(true);
-        const res = await api.get("/performances", {
+        const res = await api.get(`/performances?sortStarredFirst=${sortStarred}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -39,7 +40,7 @@ const HomePage = () => {
       }
     }
     fetchPerformances();
-  }, [refreshFlag]);
+  }, [refreshFlag, sortStarred]);
 
   return (
     <div className='min-h-screen flex justify-center bg-neutral-950'>
@@ -49,8 +50,15 @@ const HomePage = () => {
         </div>}
       {performances.length === 0 && isAuthorized && !isLoading && <NoPerformances/>}
       {!isLoading && isAuthorized &&
-        <div>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 xl:grid-cols-3 text-white mt-28'>
+        <div className='mt-24'>
+          <div className='mb-10 flex flex-row items-center gap-x-4'>
+            <p className='text-white'>Sort by:</p>
+            <button className='btn btn-bordered max-h-1 text-white' onClick={() => setSortStarred(!sortStarred)}>
+              Starred
+              {sortStarred ? <Check size={18}/> : null}
+            </button>
+          </div>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 xl:grid-cols-3 text-white'>
             {performances.map(performance => (
               <PerformanceCard key={performance._id} performance={performance} setPerformances={setPerformances} setRefreshFlag={setRefreshFlag} />
             ))}
