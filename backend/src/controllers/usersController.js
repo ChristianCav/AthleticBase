@@ -24,6 +24,18 @@ export async function getMe(req, res){
     }
 }
 
+export async function getStats(req, res){
+    try{
+        if(!req.user.id) return res.status(404).json({message: "User not found"})
+        const numPerformances = await Performance.countDocuments({userId: req.user.id});
+        const numStarredPerformances = await Performance.countDocuments({userId: req.user.id, starred: true});
+        res.status(200).json({numPerformances, numStarredPerformances});
+    }catch(error){
+        console.error("Error in getUserById controller", error)
+        res.status(500).json({message: "Internal server error"})
+    }
+}
+
 export async function createUser(req, res){
     try{
         const {username, email, password} = req.body;
