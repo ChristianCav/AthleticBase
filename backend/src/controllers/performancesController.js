@@ -4,7 +4,14 @@ import User from "../models/User.js";
 // works
 export async function getPerformances(req, res){
     try{
-        const performances = await Performance.find({userId: req.user.id}).sort({date: -1});
+        const {sortStarredFirst} = req.query
+        let performances
+        if(sortStarredFirst === 'true'){
+            performances = await Performance.find({userId: req.user.id}).sort({starred: -1, date: -1});
+        }
+        else{
+            performances = await Performance.find({userId: req.user.id}).sort({date: -1});
+        }
         res.status(200).json(performances);
     }catch(error){
         console.error("Error in getPerformances controller", error)
