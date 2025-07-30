@@ -53,7 +53,7 @@ const HomePage = () => {
         <div className='mt-24'>
           <div className='mb-10 flex flex-row items-center gap-x-4'>
             <p className='text-white'>Sort by:</p>
-            <button className='btn btn-bordered max-h-1 text-white' onClick={() => setSortStarred(!sortStarred)}>
+            <button className='btn btn-bordered max-h-1 text-white hover:bg-neutral-800' onClick={() => setSortStarred(!sortStarred)}>
               Starred
               {sortStarred ? <Check size={18}/> : null}
             </button>

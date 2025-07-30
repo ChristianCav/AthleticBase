@@ -8,7 +8,7 @@ const performanceSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ["Soccer", "Golf", "Run", "Workout"],
+        enum: ["Soccer", "Golf", "Baseball", "Basketball", "Run"],
         required: true
     },
     title: {

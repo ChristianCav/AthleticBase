@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { ChevronDown, Calendar, ArrowLeft } from 'lucide-react'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
-import Login from './Login.jsx';
 import CreateSoccer from '../components/CreateSoccer.jsx';
 import CreateRun from '../components/CreateRun.jsx';
+import CreateBasketball from '../components/CreateBasketball.jsx'
+
 
 const CreatePerformance = () => {
   const [title, setTitle] = useState("");
@@ -18,7 +19,7 @@ const CreatePerformance = () => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState("Select a type");
 
-  const options = ["Soccer", "Golf", "Run", "Workout"];
+  const options = ["Soccer", "Golf", "Basketball", "Baseball", "Run"];
 
   const handleContinue = () => {
     if(type.trim() === "" || !date){
@@ -147,6 +148,7 @@ const CreatePerformance = () => {
               </button>
               {type === "Soccer" ? <CreateSoccer date={date} location={location} title={title} duration={duration} /> : null}
               {type === "Run" ? <CreateRun date={date} location={location} title={title} duration={duration} /> : null}
+              {type === "Basketball" ? <CreateBasketball date={date} location={location} title={title} duration={duration} /> : null}
             </div>
           )}
     </div>
