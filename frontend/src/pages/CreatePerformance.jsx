@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { ChevronDown, Calendar, ArrowLeft } from 'lucide-react'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
-import CreateSoccer from '../components/CreateSoccer.jsx';
-import CreateRun from '../components/CreateRun.jsx';
-import CreateBasketball from '../components/CreateBasketball.jsx'
+import CreateSoccer from '../sportCreates/CreateSoccer.jsx';
+import CreateRun from '../sportCreates/CreateRun.jsx';
+import CreateBasketball from '../sportCreates/CreateBasketball.jsx'
+import CreateBaseball from '../sportCreates/CreateBaseball.jsx';
 
 
 const CreatePerformance = () => {
@@ -149,6 +150,7 @@ const CreatePerformance = () => {
               {type === "Soccer" ? <CreateSoccer date={date} location={location} title={title} duration={duration} /> : null}
               {type === "Run" ? <CreateRun date={date} location={location} title={title} duration={duration} /> : null}
               {type === "Basketball" ? <CreateBasketball date={date} location={location} title={title} duration={duration} /> : null}
+              {type === "Baseball" ? <CreateBaseball date={date} location={location} title={title} duration={duration} /> : null}
             </div>
           )}
     </div>

@@ -4,16 +4,16 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
 import api from '../lib/axios.js';
 
-const CreateSoccer = ({location, duration, title, date}) => {
+const CreateBasketball = ({location, duration, title, date}) => {
   const [data, setData] = useState({
-    "goals": 0,
+    "points": 0,
     "assists": 0,
-    "shots": 0,
-    "shots-on-target": 0,
-    "yellow-cards": 0,
-    "red-cards": 0
+    "rebounds": 0,
+    "shots-attempted": 0,
+    "shots-made": 0,
+    "fouls": 0
   });
-  const type = "Soccer"
+  const type = "Basketball"
   const navigate = useNavigate();
 
   const handleCreate = async(e) => {
@@ -53,16 +53,16 @@ const CreateSoccer = ({location, duration, title, date}) => {
         <div className="shots-container flex flex-row gap-x-6">
             <div className="form-control w-full">
                 <label className="label">
-                <span className="label-text">Goals</span>
+                <span className="label-text">Points</span>
               </label>
               <input
                 type="number"
-                placeholder="Enter goals"
+                placeholder="Enter points"
                 className="input input-bordered w-full max-h-11"
                 onChange={(e) => {
                     setData(prev => ({
                         ...prev,
-                        "goals": e.target.value,
+                        "points": Number(e.target.value),
                     }));
                 }}
               />
@@ -79,7 +79,7 @@ const CreateSoccer = ({location, duration, title, date}) => {
                     onChange={(e) => {
                         setData(prev => ({
                             ...prev,
-                            "assists": e.target.value,
+                            "assists": Number(e.target.value),
                         }));
                     }}
                 />
@@ -89,16 +89,16 @@ const CreateSoccer = ({location, duration, title, date}) => {
         <div className="shots-container flex flex-row gap-x-6">
             <div className="form-control w-full">
                 <label className="label">
-                    <span className="label-text">Shots</span>
+                    <span className="label-text">Rebounds</span>
                 </label>
                 <input
                     type="number"
-                    placeholder="Enter shots"
+                    placeholder="Enter rebounds"
                     className="input input-bordered w-full max-h-11"
                     onChange={(e) => {
                         setData(prev => ({
                             ...prev,
-                            "shots": e.target.value,
+                            "rebounds": Number(e.target.value),
                         }));
                     }}
                 />
@@ -106,16 +106,16 @@ const CreateSoccer = ({location, duration, title, date}) => {
 
             <div className="form-control w-full">
                 <label className="label">
-                    <span className="label-text">Shots on target</span>
+                    <span className="label-text">Shots Made</span>
                 </label>
                 <input
                     type="number"
-                    placeholder="Enter SOT"
+                    placeholder="Enter shots made"
                     className="input input-bordered w-full max-h-11"
                     onChange={(e) => {
                         setData(prev => ({
                             ...prev,
-                            "shots-on-target": e.target.value,
+                            "shots-made": Number(e.target.value),
                         }));
                     }}
                 />
@@ -125,16 +125,16 @@ const CreateSoccer = ({location, duration, title, date}) => {
         <div className="cards-container flex flex-row gap-x-6">
             <div className="form-control w-full">
                 <label className="label">
-                    <span className="label-text">Yellow Cards</span>
+                    <span className="label-text">Shots Attempted</span>
                 </label>
                 <input
                     type="number"
-                    placeholder="Enter yellow cards"
+                    placeholder="Enter shots attempted"
                     className="input input-bordered w-full max-h-11"
                     onChange={(e) => {
                         setData(prev => ({
                             ...prev,
-                            "yellow-cards": e.target.value,
+                            "shots-attempted": Number(e.target.value),
                         }));
                     }}
                 />
@@ -142,16 +142,16 @@ const CreateSoccer = ({location, duration, title, date}) => {
 
             <div className="form-control w-full">
                 <label className="label">
-                    <span className="label-text">Red Cards</span>
+                    <span className="label-text">Fouls</span>
                 </label>
                 <input
                     type="number"
-                    placeholder="Enter red cards"
+                    placeholder="Enter fouls"
                     className="input input-bordered w-full max-h-11"
                     onChange={(e) => {
                         setData(prev => ({
                             ...prev,
-                            "red-cards": e.target.value,
+                            "fouls": Number(e.target.value),
                         }));
                     }}
                 />
@@ -167,4 +167,4 @@ const CreateSoccer = ({location, duration, title, date}) => {
   )
 }
 
-export default CreateSoccer
+export default CreateBasketball

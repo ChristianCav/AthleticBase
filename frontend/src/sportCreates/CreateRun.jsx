@@ -58,7 +58,7 @@ const CreateRun = ({location, duration, title, date}) => {
                     onChange={(e) => {
                         setData(prev => ({
                             ...prev,
-                            "distance": e.target.value,
+                            "distance": Number(e.target.value),
                         }));
                     }}
                 />
