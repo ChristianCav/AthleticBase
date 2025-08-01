@@ -10,11 +10,11 @@ const Navbar = () => {
 
     const handleLogoClick = () => {
         const current = location.pathname
-        if(current === "/homepage" || current === "/create" || current === "/profile" || current === "/profile"){
-            navigate("/homepage")
+        if(current === "/" || current === "/signup" || current === "/login"){
+            navigate("/")
         }
         else{
-            navigate("/")
+            navigate("/homepage")
         }
     }
 

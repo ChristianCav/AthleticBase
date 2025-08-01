@@ -9,6 +9,7 @@ import CreatePerformance from './pages/CreatePerformance'
 import ProfilePage from './pages/ProfilePage'
 import SettingsPage from './pages/SettingsPage'
 import FriendsPage from './pages/FriendsPage'
+import PerformanceDetail from './pages/PerformanceDetail'
 
 const App = () => {
   return (
@@ -20,7 +21,7 @@ const App = () => {
           <Route path="/signup" element={<SignUp />}/>
           <Route path="/homepage" element={<HomePage />} />
           <Route path='/create' element={<CreatePerformance />} />
-          <Route path='/performance/:id'></Route>
+          <Route path='/performance/:id' element={<PerformanceDetail />} />
           <Route path='/profile' element={<ProfilePage />}></Route>
           <Route path='/settings' element={<SettingsPage />}></Route>
           <Route path='/friends' element={<FriendsPage />}></Route>

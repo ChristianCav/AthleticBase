@@ -20,9 +20,10 @@ export async function getPerformances(req, res){
 }
 
 // works
-export async function getAllPerformances(_, res){
+export async function getPerformanceById(req, res){
     try{
-        const performances = await Performance.find().sort({date: -1});
+        const id = req.params.id;
+        const performances = await Performance.find({_id: id});
         res.status(200).json(performances);
     }catch(error){
         console.error("Error in getPerformances controller", error)
