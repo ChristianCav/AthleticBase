@@ -48,8 +48,8 @@ const HomePage = () => {
         <Spinner />
         Loading performances...
         </div>}
-      {performances.length === 0 && isAuthorized && !isLoading && <NoPerformances/>}
-      {!isLoading && isAuthorized &&
+      {performances.length === 0 && isAuthorized && !isLoading && <div className='flex items-center justify-center min-h-screen w-full'><NoPerformances/></div>}
+      {!isLoading && isAuthorized && performances.length !== 0 &&
         <div className='mt-24'>
           <div className='mb-10 flex flex-row items-center gap-x-4'>
             <p className='text-white'>Sort by:</p>
@@ -79,3 +79,5 @@ const HomePage = () => {
 }
 
 export default HomePage
+
+//sm:mt-30 md:mt-40 lg:mt-60
