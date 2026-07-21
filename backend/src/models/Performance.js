@@ -1,41 +1,44 @@
 import mongoose, { mongo } from "mongoose";
 
-const performanceSchema = new mongoose.Schema({
+const performanceSchema = new mongoose.Schema(
+  {
     userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
     type: {
-        type: String,
-        enum: ["Soccer", "Golf", "Baseball", "Basketball", "Run"],
-        required: true
+      type: String,
+      enum: ["Soccer", "Baseball", "Basketball", "Run"],
+      required: true,
     },
     title: {
-        type: String,
-        default: "Untitled Performance"
+      type: String,
+      default: "Untitled Performance",
     },
     duration: {
-        type: Number,
-        default: 0,
+      type: Number,
+      default: 0,
     },
     location: {
-        type: String,
-        default: ""
+      type: String,
+      default: "",
     },
     date: {
-        type: Date,
-        required: true
+      type: Date,
+      required: true,
     },
     data: {
-        type: mongoose.Schema.Types.Mixed,
-        required: true
+      type: mongoose.Schema.Types.Mixed,
+      required: true,
     },
     starred: {
-        type: Boolean,
-        default: false
-    }
-}, {timestamps: true});
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true },
+);
 
 const Performance = mongoose.model("Performance", performanceSchema);
 

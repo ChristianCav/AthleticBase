@@ -1,11 +1,9 @@
-import React from 'react'
+import React from "react";
 
 const FriendsPage = () => {
   return (
-    <div className='min-h-screen flex items-center justify-center bg-neutral-950'>
+    <div className="min-h-screen flex items-center justify-center bg-neutral-950 pt-20"></div>
+  );
+};
 
-    </div>
-  )
-}
-
-export default FriendsPage
+export default FriendsPage;
